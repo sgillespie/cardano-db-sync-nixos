@@ -47,10 +47,12 @@
           packages = {
             inherit cardano-db-sync-docker cardano-smash-server-docker;
           };
+
+          legacyPackages = pkgs;
       }) // {
         nixosModules = {
           cardano-db-sync = { pkgs, lib, ... }: {
-            imports = [ ./nix/nixos/cardano-db-sync-service.nix ];
+            imports = [ ./nixos/cardano-db-sync-service.nix ];
             services.cardano-db-sync.dbSyncPkgs =
               let
                 pkgs' = self.legacyPackages.${pkgs.system};
